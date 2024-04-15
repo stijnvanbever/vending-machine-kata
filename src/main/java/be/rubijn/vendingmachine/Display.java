@@ -8,7 +8,11 @@ import java.util.Stack;
 public class Display {
     Stack<String> text;
 
-    public String read(int amount) {
+    public String readText(int amount) {
         return String.format("INSERT COIN.\nAMOUNT: %.2f", amount / 100f);
+    }
+
+    public String readAmount(int amount){
+
     }
 }

@@ -55,7 +55,7 @@ public class VendingMachineTest {
 
         vendingMachine.accept(INVALID_EURO_COIN);
 
-        assertThat(vendingMachine.showDisplay()).isEqualTo("AMOUNT: 1.00");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("THANK YOU.\nAMOUNT: 1.00");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class VendingMachineTest {
 
         vendingMachine.selectProduct(COLA);
 
-        assertThat(vendingMachine.showDisplay()).isEqualTo("THANK YOU");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("THANK YOU.\nAMOUNT: 1.00");
         assertThat(vendingMachine.getItemsFromDispenser()).containsExactlyInAnyOrder(COLA);
     }
 }
