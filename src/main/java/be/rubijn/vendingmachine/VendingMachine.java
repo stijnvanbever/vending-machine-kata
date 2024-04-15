@@ -43,7 +43,7 @@ public class VendingMachine {
             return;
         }
 
-        //todo display = "THANK YOU";
+        display.addText("THANK YOU");
         amount -= product.price;
         itemDispencer.add(product);
     }

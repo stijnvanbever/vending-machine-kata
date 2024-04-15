@@ -23,14 +23,14 @@ public class VendingMachineTest {
 
     @Test
     void whenVendingMachineIsEmpty_thenShowInsertCoin(){
-        assertThat(vendingMachine.showDisplay()).isEqualTo("INSERT COIN");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("INSERT COIN\nAMOUNT: 0.00");
     }
 
     @Test
     void whenCoinsAreAccepted_thenAddAmountToTotal(){
         vendingMachine.accept(ONE_EURO_COIN);
 
-        assertThat(vendingMachine.showDisplay()).isEqualTo("AMOUNT: 1.00");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("INSERT COIN\nAMOUNT: 1.00");
     }
 
     @Test
@@ -39,14 +39,14 @@ public class VendingMachineTest {
         vendingMachine.accept(FIFTY_CENT_COIN);
         vendingMachine.accept(TWO_EURO_COIN);
 
-        assertThat(vendingMachine.showDisplay()).isEqualTo("AMOUNT: 3.50");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("INSERT COIN\nAMOUNT: 3.50");
     }
 
     @Test
     void whenInvalidCoinsAreAccepted_thenDontAddAmountToTotal(){
         vendingMachine.accept(INVALID_EURO_COIN);
 
-        assertThat(vendingMachine.showDisplay()).isEqualTo("INSERT COIN");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("INSERT COIN\nAMOUNT: 0.00");
     }
 
     @Test
@@ -55,7 +55,7 @@ public class VendingMachineTest {
 
         vendingMachine.accept(INVALID_EURO_COIN);
 
-        assertThat(vendingMachine.showDisplay()).isEqualTo("THANK YOU.\nAMOUNT: 1.00");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("INSERT COIN\nAMOUNT: 1.00");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class VendingMachineTest {
 
         vendingMachine.selectProduct(COLA);
 
-        assertThat(vendingMachine.showDisplay()).isEqualTo("THANK YOU.\nAMOUNT: 1.00");
+        assertThat(vendingMachine.showDisplay()).isEqualTo("THANK YOU\nAMOUNT: 0.00");
         assertThat(vendingMachine.getItemsFromDispenser()).containsExactlyInAnyOrder(COLA);
     }
 }
