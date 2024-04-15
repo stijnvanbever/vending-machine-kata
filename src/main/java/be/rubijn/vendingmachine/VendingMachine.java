@@ -11,12 +11,16 @@ public class VendingMachine {
     private final EuroDeterminer euroDeterminer;
     int amount = 0;
     Collection<Coin> returnTray = new LinkedList<>();
+    Collection<Product> itemDispencer = new LinkedList<>();
+    String display = "INSERT COIN";
 
     public VendingMachine(EuroDeterminer euroDeterminer) {
         this.euroDeterminer = euroDeterminer;
     }
 
     public String showDisplay() {
+        return display;
+
         if (amount == 0) {
             return "INSERT COIN";
         }
@@ -33,5 +37,23 @@ public class VendingMachine {
 
     public Collection<Coin> getReturnTray() {
         return Collections.unmodifiableCollection(returnTray);
+    }
+
+    public String showInitMessage() {
+        return "welkom in EUROpa, blijf hier tot ik doodga";
+    }
+
+    public void selectProduct(Product product) {
+        if (product.price > amount){
+            return;
+        }
+
+        display = "THANK YOU";
+        amount -= product.price;
+        itemDispencer.add(product);
+    }
+
+    public Collection<Product> getItemsFromDispenser() {
+        return Collections.unmodifiableCollection(itemDispencer);
     }
 }

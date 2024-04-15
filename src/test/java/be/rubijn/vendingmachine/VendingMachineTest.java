@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static be.rubijn.vendingmachine.Product.COLA;
 import static be.rubijn.vendingmachine.TestData.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
@@ -14,6 +15,11 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 public class VendingMachineTest {
     @Autowired
     private VendingMachine vendingMachine;
+
+    @Test
+    void whenShowInitMessage_thenShowWelkomInEUROpapa(){
+        assertThat(vendingMachine.showInitMessage()).isEqualTo("welkom in EUROpa, blijf hier tot ik doodga");
+    }
 
     @Test
     void whenVendingMachineIsEmpty_thenShowInsertCoin(){
@@ -57,5 +63,15 @@ public class VendingMachineTest {
         vendingMachine.accept(INVALID_EURO_COIN);
 
         assertThat(vendingMachine.getReturnTray()).containsExactlyInAnyOrder(INVALID_EURO_COIN);
+    }
+
+    @Test
+    void givenOneEuroIsInserted_whenColaIsSelected_thenProductIsDispenced(){
+        vendingMachine.accept(ONE_EURO_COIN);
+
+        vendingMachine.selectProduct(COLA);
+
+        assertThat(vendingMachine.showDisplay()).isEqualTo("THANK YOU");
+        assertThat(vendingMachine.getItemsFromDispenser()).containsExactlyInAnyOrder(COLA);
     }
 }
