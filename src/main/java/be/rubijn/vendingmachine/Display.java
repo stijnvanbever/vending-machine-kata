@@ -1,7 +1,10 @@
 package be.rubijn.vendingmachine;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Stack;
 
+@Component
 public class Display {
     Stack<String> text;
 

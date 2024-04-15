@@ -5,18 +5,16 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DisplayTest {
+    private final Display display = new Display();
+
     @Test
     void whenReadingDisplay_thenShowInsertCoin(){
-        Display display = new Display();
-
-        assertThat(display.read()).isEqualTo("INSERT COIN.\nAMOUNT: 0.00");
+        assertThat(display.read(0)).isEqualTo("INSERT COIN.\nAMOUNT: 0.00");
     }
 
     @Test
     void givenAmountOnePointFiveEuro_whenReadingDisplay_thenShowInsertCoin(){
-        Display display = new Display();
-
-        assertThat(display.read()).isEqualTo("INSERT COIN.\nAMOUNT: 1.50");
+        assertThat(display.read(150)).isEqualTo("INSERT COIN.\nAMOUNT: 1.50");
     }
 
     //todo test voor selected product

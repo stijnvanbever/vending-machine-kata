@@ -9,23 +9,18 @@ import java.util.LinkedList;
 @Component
 public class VendingMachine {
     private final EuroDeterminer euroDeterminer;
+    private final Display display;
     int amount = 0;
     Collection<Coin> returnTray = new LinkedList<>();
     Collection<Product> itemDispencer = new LinkedList<>();
-    String display = "INSERT COIN";
 
-    public VendingMachine(EuroDeterminer euroDeterminer) {
+    public VendingMachine(EuroDeterminer euroDeterminer, Display display) {
         this.euroDeterminer = euroDeterminer;
+        this.display = display;
     }
 
     public String showDisplay() {
-        return display;
-
-        if (amount == 0) {
-            return "INSERT COIN";
-        }
-
-        return String.format("AMOUNT: %.2f", amount / 100f);
+        return display.read(amount);
     }
 
     public void accept(Coin coin) {
@@ -48,7 +43,7 @@ public class VendingMachine {
             return;
         }
 
-        display = "THANK YOU";
+        //todo display = "THANK YOU";
         amount -= product.price;
         itemDispencer.add(product);
     }
